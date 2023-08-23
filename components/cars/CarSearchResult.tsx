@@ -4,18 +4,18 @@ import Image from 'next/image'
 import LikeComponent from "@/components/ui/LikeComponent";
 import PriceFormat from "@/utils/PriceFormat";
 
-import {StockCars} from "@/models/StockCars";
-import {FaGasPump} from "react-icons/fa";
-import {PiEngineFill, PiGearFineBold } from "react-icons/pi";
-import {GiCarDoor} from "react-icons/gi";
-import {BiSolidColorFill} from "react-icons/bi";
-import {MdAirlineSeatReclineExtra} from "react-icons/md";
-import {Country} from "@/models/Master/Country";
-import {PaginationHeader} from "@/models/Master/Pagination";
-import {useEffect, useState} from "react";
+import { StockCars } from "@/models/StockCars";
+import { FaGasPump } from "react-icons/fa";
+import { PiEngineFill, PiGearFineBold } from "react-icons/pi";
+import { GiCarDoor } from "react-icons/gi";
+import { BiSolidColorFill } from "react-icons/bi";
+import { MdAirlineSeatReclineExtra } from "react-icons/md";
+import { Country } from "@/models/Master/Country";
+import { PaginationHeader } from "@/models/Master/Pagination";
+import { useEffect, useState } from "react";
 import PaginationComponent from "@/components/ui/PaginationComponent";
 import agent from "@/api/agent";
-interface Props{
+interface Props {
 
     locations: Country[]
     params: URLSearchParams
@@ -32,10 +32,10 @@ interface Props{
 //     }
 // }
 
-export default  function CarSearchResult({locations, params}:Props){
+export default function CarSearchResult({ locations, params }: Props) {
 
-    const searchParams:URLSearchParams = params;
-    const[ searchData, setSearchData] = useState<StockCars[]>([]);
+    const searchParams: URLSearchParams = params;
+    const [searchData, setSearchData] = useState<StockCars[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [paginationData, setPaginationData] = useState<PaginationHeader>({
         CurrentPage: 1,
@@ -50,10 +50,10 @@ export default  function CarSearchResult({locations, params}:Props){
 
     useEffect(() => {
         // Assuming you have an API function called fetchResults
-        const GetStock = async (paramURL:string) => {
+        const GetStock = async (paramURL: string) => {
             try {
                 const { data, paginationHeader } = await agent.LoadData.stockList(paramURL, currentPage);
-                console.log("This is param URL",  paramURL);
+                console.log("This is param URL", paramURL);
 
                 if (paginationHeader) {
                     setPaginationData(paginationHeader);
@@ -61,10 +61,10 @@ export default  function CarSearchResult({locations, params}:Props){
 
                 setSearchData(data);
                 console.log("This is search Data", data)
-                console.log({"paginationHeader": paginationHeader} + "paginationHeader")
+                console.log({ "paginationHeader": paginationHeader } + "paginationHeader")
 
 
-            }catch (error:any){
+            } catch (error: any) {
                 console.log(error);
             }
 
@@ -86,20 +86,20 @@ export default  function CarSearchResult({locations, params}:Props){
     }, [searchParams, currentPage]);
 
 
-    return(
+    return (
         <>
             {/*<SearchingCriteria resultCount={searchData.length} locations={locations} />*/}
             {/*<PaginationComponent currentPage={currentPage} totalPost={cars.length} postPerPage={postsPerPage} setCurrentPage={setCurrentPage} />*/}
-          {
-             // Array.isArray(searchData) && searchData.map(result => (( car:StockCars) =>
-              Array.isArray(searchData) && searchData.map(car=>(
+            {
+                // Array.isArray(searchData) && searchData.map(result => (( car:StockCars) =>
+                Array.isArray(searchData) && searchData.map(car => (
                     <div key={car.stockId} className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div className="row my-5 ">
                             <div className="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-5">
                                 <div className="searched-carimage ">
                                     <Link href={`/global/results/cars/${car.stockId}`}>
-                                        <Image src={car.imageUrl??""} className="mb-4" alt=""  height={150}
-                                               width={150} /></Link>
+                                        <Image src={car.imageUrl ?? ""} className="mb-4" alt="" height={150}
+                                            width={150} /></Link>
 
                                     <h4 className="ml-5">STOCK ID : <span className="inline-flex items-center gap-x-1.5 rounded-full bg-yellow-400 px-2 py-1 text-l font-medium text-blue-950">{car.stockCode}</span></h4>
 
@@ -118,7 +118,7 @@ export default  function CarSearchResult({locations, params}:Props){
                                                 <h6 className="text-right">
                                                     <span className="font-bold inline-flex">
                                                         <Image
-                                                            src={`/assets/images/flags/${locations.find(x=>x.countryId==car.locationId)?.slug}.svg`}
+                                                            src={`/assets/images/flags/${locations.find(x => x.countryId == car.locationId)?.slug}.svg`}
                                                             className="img-fluid mr-2"
                                                             height={20}
                                                             width={20}
@@ -134,27 +134,27 @@ export default  function CarSearchResult({locations, params}:Props){
                                             <div className="col-sm specs">
                                                 <h4>Mileage</h4>
                                                 <span className="label-text  p-1  flex items-center rounded-md ml-5">
-                                                     <img decoding="async" src="/assets/images/kmsDriven.svg" loading="eager" className="h-6 mr-2"/>
+                                                    <img decoding="async" src="/assets/images/kmsDriven.svg" loading="eager" className="h-6 mr-2" />
                                                     {car.mileage}
-                                                 </span>
+                                                </span>
                                             </div>
                                             <div className="col-sm specs">
                                                 <h4>YEAR</h4>
                                                 <span className="label-text  p-1  flex items-center rounded-md ml-5">
-                                                    <img decoding="async" src="/assets/images/registrationYear.svg" loading="eager" className="h-6 mr-2"/>
+                                                    <img decoding="async" src="/assets/images/registrationYear.svg" loading="eager" className="h-6 mr-2" />
                                                     {car.year} </span>
                                             </div>
                                             <div className="col-sm specs">
                                                 <h4>Engine</h4>
                                                 <span className="label-text  p-1 flex items-center rounded-md ml-5">
-                                                     {/*<img decoding="async" src="/assets/images/engineDisplacement.svg" loading="eager"className="h-6 mr-2"/>*/}
+                                                    {/*<img decoding="async" src="/assets/images/engineDisplacement.svg" loading="eager"className="h-6 mr-2"/>*/}
                                                     <span className="h-auto mr-2"><PiEngineFill /></span>
                                                     {car.engineSize}</span>
                                             </div>
                                             <div className="col-sm specs">
                                                 <h4>Transmision</h4>
                                                 <span className="label-text  p-1 flex items-center rounded-md ml-5">
-                                                    <img decoding="async" src="/assets/images/transmission.svg" loading="eager" className="h-6"/>
+                                                    <img decoding="async" src="/assets/images/transmission.svg" loading="eager" className="h-6" />
                                                     {car.transmissionName} </span>
                                             </div>
                                             {/*<div className="col-sm specs">*/}
@@ -168,7 +168,7 @@ export default  function CarSearchResult({locations, params}:Props){
                                                 <span className="label-text  p-1 flex items-center rounded-md ml-5">
                                                     <span className="h-auto mr-2"><FaGasPump /></span>
                                                     {car.typeOfFuel}
-                                                 </span>
+                                                </span>
                                             </div>
 
                                         </div>
@@ -177,33 +177,33 @@ export default  function CarSearchResult({locations, params}:Props){
                                             <div className="col-sm specs">
                                                 <h4>Drivetrain</h4>
                                                 <span className="label-text  p-1 flex items-center rounded-md ml-5">
-                                                      <span className="h-auto mr-2"><PiGearFineBold /></span>
+                                                    <span className="h-auto mr-2"><PiGearFineBold /></span>
                                                     {car.drivetrainType}
-                                                 </span>
+                                                </span>
                                             </div>
                                             <div className="col-sm specs">
                                                 <h4>Doors</h4>
                                                 <span className="label-text  p-1 flex items-center rounded-md ml-5">
-                                                  <span className="h-auto mr-2"><GiCarDoor /></span>
+                                                    <span className="h-auto mr-2"><GiCarDoor /></span>
                                                     {car.noOfDoors}</span>
                                             </div>
                                             <div className="col-sm specs">
                                                 <h4>Seats</h4>
                                                 <span className="label-text  p-1 flex items-center rounded-md ml-5">
-                                                     <span className="h-auto mr-2"><MdAirlineSeatReclineExtra /></span>
+                                                    <span className="h-auto mr-2"><MdAirlineSeatReclineExtra /></span>
                                                     {car.noOfSeats} </span>
                                             </div>
                                             <div className="col-sm specs">
                                                 <h4>Color</h4>
                                                 <span className="label-text  p-1 flex items-center rounded-md ml-5">
-                                                  <span className="h-auto mr-2"><BiSolidColorFill /></span>
+                                                    <span className="h-auto mr-2"><BiSolidColorFill /></span>
                                                     {car.colorName}</span>
 
                                             </div>
                                             <div className="col-sm specs">
                                                 <h4>Model Code</h4>
                                                 <span className="label-text p-1 flex items-center rounded-md ml-5">
-                                                  {/*<span className="h-6 mr-2"><AiOutlineBarcode /></span>*/}
+                                                    {/*<span className="h-6 mr-2"><AiOutlineBarcode /></span>*/}
                                                     {car.modelCode}</span>
 
                                             </div>
@@ -239,7 +239,7 @@ export default  function CarSearchResult({locations, params}:Props){
                                             <div className="addfav">
                                                 <h5>
                                                     {/*<Link href="#" scroll={false}>*/}
-                                                        <LikeComponent/>
+                                                    <LikeComponent />
                                                     {/*</Link>*/}
                                                 </h5>
                                             </div>
@@ -255,7 +255,7 @@ export default  function CarSearchResult({locations, params}:Props){
                                         <h6 className="font-bold">
                                             FOB Price:
                                             <span className="mb-5 text-[20px] ">
-                                               <PriceFormat carPrice={car.price} />
+                                                <PriceFormat carPrice={car.price} />
                                             </span>
                                         </h6>
                                     </div>
@@ -292,7 +292,7 @@ export default  function CarSearchResult({locations, params}:Props){
 
                                     <Link href={`/global/results/cars/${car.stockId}`}>
                                         <button className="offerbtn">
-                                        <span className="font-bold">    Send Offer</span>
+                                            <span className="font-bold">    Send Offer</span>
                                         </button>
                                     </Link>
 

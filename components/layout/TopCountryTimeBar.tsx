@@ -75,7 +75,6 @@ export default  function TopCountryTimeBar({stockCount}:Props){
                     </svg>
                         {uaeDateTime}
                   </span>
-
                 </div>
             </div>
             <div className="secondsection col-lg-4 col-md-6 col-12 text-center mt-1">
@@ -90,7 +89,6 @@ export default  function TopCountryTimeBar({stockCount}:Props){
                   </span>
                 </div>
             </div>
-
         </>
     )
 }

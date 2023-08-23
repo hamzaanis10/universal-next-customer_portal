@@ -84,7 +84,7 @@ export default function TruckSimpleSearch({bodyTypes, makes,yearList}: Props) {
         <div className="showcase-Box carform mb-5">
             <Form onSubmit={handleSubmit} autoComplete="off">
                 <div className="row">
-                    <div className="col-lg-4 col-md-6 col-sm-6 col-6">
+                    <div className="col-lg-4 col-md-6 col-sm-6 col-12">
                         <label>Make: </label>
                         {/*<SearchSelect value={makeId} onValueChange={setMakeId}>*/}
                         <SearchSelect value={makeId} onValueChange={handleValueChange}>
@@ -100,7 +100,7 @@ export default function TruckSimpleSearch({bodyTypes, makes,yearList}: Props) {
                         </SearchSelect>
                     </div>
 
-                    <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6">
+                    <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                         <label>Model:</label>
                         {
                             renderMappedModels()
@@ -108,7 +108,7 @@ export default function TruckSimpleSearch({bodyTypes, makes,yearList}: Props) {
                     </div>
 
 
-                    <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6">
+                    <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                         <label>Mileage</label>
                         <div className="showcase-Boxselect">
 
@@ -132,7 +132,7 @@ export default function TruckSimpleSearch({bodyTypes, makes,yearList}: Props) {
                         </div>
 
                     </div>
-                    <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6">
+                    <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                         <label>Reg. Date from</label>
                         <SearchSelect value={toYear} onValueChange={setToYear}>
                             {
@@ -146,7 +146,7 @@ export default function TruckSimpleSearch({bodyTypes, makes,yearList}: Props) {
 
 
                     </div>
-                    <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6">
+                    <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                         <label>Price Until:</label>
                         <SearchSelect value={toPrice} onValueChange={setToPrice}>
                             <SearchSelectItem value="10000" >
